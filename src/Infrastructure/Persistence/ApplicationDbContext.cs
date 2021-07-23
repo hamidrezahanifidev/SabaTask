@@ -35,6 +35,8 @@ namespace CleanArchitecture.Infrastructure.Persistence
 
         public DbSet<TodoList> TodoLists { get; set; }
 
+        public DbSet<Image> Images { get; set; }
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())

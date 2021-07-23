@@ -1,0 +1,29 @@
+<form [formGroup]="uploadForm" (ngSubmit)="upload()">
+
+  <div class="preview" *ngIf="imgFile">
+    <img [src]="imgFile" style="width:400px; height:250px">
+  </div>
+
+  <input type="file" accept="image/*"  id="file" formControlName="file" (change)="onImageChange($event)">
+  <div *ngIf="uf.file.touched && uf.file.invalid" class="alert alert-danger">
+    <div *ngIf="uf.file.errors.required">Image file is required.</div>
+  </div>
+
+  <button class="btn btn-success" type="submit">Upload File</button>
+</form>
+<br>
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let item of imageDto">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        Similarity: {{ item.similarity }}%
+      </div>
+      <div class="card-body">
+        <img class="card-img-top" [src]="item.base64|safeImagePath" alt="item.name">
+        <h5 class="card-title"> {{ item.name }} </h5>
+      </div>
+    </div>
+  </div>
+</div>
+

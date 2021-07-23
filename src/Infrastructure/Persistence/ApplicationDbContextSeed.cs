@@ -2,6 +2,10 @@
 using CleanArchitecture.Domain.ValueObjects;
 using CleanArchitecture.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +13,7 @@ namespace CleanArchitecture.Infrastructure.Persistence
 {
     public static class ApplicationDbContextSeed
     {
+       
         public static async Task SeedDefaultUserAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             var administratorRole = new IdentityRole("Administrator");
@@ -51,6 +56,19 @@ namespace CleanArchitecture.Infrastructure.Persistence
 
                 await context.SaveChangesAsync();
             }
+
+            if (!context.Images.Any())
+            {
+                string[] filePaths = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images"));
+
+                foreach ( string filepath in filePaths)
+                {
+                    context.Images.Add(new Image { Name = Path.GetFileName(filepath), Address = filepath });
+                }
+
+                await context.SaveChangesAsync();
+            }
+
         }
     }
 }

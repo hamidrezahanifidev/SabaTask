@@ -6,6 +6,43 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/Images": {
+      "post": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Get",
+        "requestBody": {
+          "x-name": "data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImagesVm"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/TodoItems": {
       "get": {
         "tags": [
@@ -440,6 +477,37 @@
   },
   "components": {
     "schemas": {
+      "ImagesVm": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "images": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ImageDto"
+            }
+          }
+        }
+      },
+      "ImageDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "base64": {
+            "type": "string",
+            "nullable": true
+          },
+          "similarity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "PaginatedListOfTodoItemDto": {
         "type": "object",
         "additionalProperties": false,

@@ -12,10 +12,19 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.3.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+    <Folder Include="Images\Commands\" />
+    <Folder Include="Images\Queries\" />
+    <Folder Include="Images\Commands\GetImagesWithSimilarity\" />
+    <Folder Include="Common\Helpers\" />
+    <Folder Include="Common\Extentions\" />
+  </ItemGroup>
 </Project>
